@@ -10,10 +10,10 @@ require 'date'
 
 ItemCart.destroy_all
 ItemCategory.destroy_all
-ItemPurchase.destroy_all
+ItemOrder.destroy_all
 Cart.destroy_all
 Category.destroy_all
-Purchase.destroy_all
+Order.destroy_all
 Item.destroy_all
 User.destroy_all
 
