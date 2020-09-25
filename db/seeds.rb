@@ -31,3 +31,10 @@ alec = User.create(name: 'Alec',
   dob: Date.iso8601('1990-05-15'),
   email: 'after.alec@gmail.com',
   address: 'localhost:5500')
+
+giphy_response = RestClient::Request.execute(method: :get,
+  url: "https://api.giphy.com/v1/gifs/trending?api_key=#{ENV['GIPHY_API_KEY']}&limit=25&rating=pg-13",
+  headers: { 'Content-Type': 'application/json', Accept: 'application/json' })
+
+giphy_json = JSON.parse(giphy_response)
+giphy_json['data'].each { |gif| Item.create(title: gif['title'], image: gif['embed_url'], price: rand().round(2)) }
