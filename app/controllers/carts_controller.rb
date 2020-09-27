@@ -15,7 +15,7 @@ class CartsController < ApplicationController
         render json: cart
     end
 # if we want to handle POST and DELETE of join records in carts controller ALT would be to use the POST and DELETE in items_carts controller
-    def addItem
+    def removeItem
         record = ItemCart.where(item_id: (params[:item_id]), cart_id: (params[:cart_id]))
         if record.destroy
             render json: {message: 'sucessfully removed item from cart'}
@@ -24,7 +24,7 @@ class CartsController < ApplicationController
         end
     end 
 
-    def removeItem
+    def addItem
         record = ItemCart.create(item_id: (params[:item_id]), cart_id: (params[:cart_id]))
         if record 
             render json: record 
