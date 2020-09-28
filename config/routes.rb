@@ -7,6 +7,9 @@ Rails.application.routes.draw do
         post '/cart/removeItem', to: 'cart#removeItem'
     end
   end
+
+  post '/login', to: 'auth#create'
+  post '/signup', to: 'users#create'
 end
 
 # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
