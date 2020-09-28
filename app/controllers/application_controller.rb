@@ -16,6 +16,7 @@ class ApplicationController < ActionController::API
       JWT.decode(token, ENV['SECRET'], true, { alg: ENV['ALG'] })
     rescue JWT::DecodeError
       [ { error: 'invalid token' } ]
+    end
   end
 
   def user_id
