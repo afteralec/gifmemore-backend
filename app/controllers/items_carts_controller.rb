@@ -1,9 +1,4 @@
-class ItemsCartsController < ApplicationController
-  # def index
-  #     carts = Cart.all
-  #     render json: carts
-  # end
-
+class ItemsCartsController < ApplicationController # end #     render json: carts #     carts = Cart.all # def index
   # def show
   #     cart = Cart.find(params[:id])
   #     render json: cart

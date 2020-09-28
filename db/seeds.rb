@@ -41,10 +41,6 @@ alec =
     address: 'localhost:5500'
   )
 
-Cart.create(user: janu)
-Cart.create(user: danira)
-Cart.create(user: alec)
-
 giphy_response =
   RestClient::Request.execute(
     method: :get,
@@ -58,6 +54,8 @@ giphy_response =
 giphy_json = JSON.parse(giphy_response)
 giphy_json['data'].each do |gif|
   Item.create(
-    title: gif['title'], image: gif['images']['fixed_width']['url'], price: rand.round(2)
+    title: gif['title'],
+    image: gif['images']['fixed_width']['url'],
+    price: rand.round(2)
   )
 end

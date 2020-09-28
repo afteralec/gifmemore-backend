@@ -3,7 +3,7 @@ class CreateOrders < ActiveRecord::Migration[6.0]
     create_table :orders do |t|
       t.references :user, null: false, foreign_key: true
       t.string :address
-      t.float :price
+      t.float :amount
 
       t.timestamps
     end
