@@ -4,6 +4,8 @@ Rails.application.routes.draw do
       post '/cart_total', to: 'carts#total'
       resources :items, only: %i[ index ]
       resources :orders, only: %i[ create ]
+      resources :users 
+      
       get '/orders/user_history/:user_id', to: 'orders#orderHistory'
     end
   end
