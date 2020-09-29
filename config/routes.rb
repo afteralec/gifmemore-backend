@@ -3,7 +3,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/cart_total', to: 'carts#total'
       resources :items, only: %i[ index ]
-        get '/orders/user_history/:user_id', to: 'orders#orderHistory'
+      resources :orders, only: %i[ create ]
+      get '/orders/user_history/:user_id', to: 'orders#orderHistory'
     end
   end
   # post '/cart/addItem', to: 'carts#addItem'

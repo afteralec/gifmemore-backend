@@ -15,9 +15,7 @@ class Api::V1::CartsController < ApplicationController
   end
 
   def total 
-    # byebug
     total = Cart.total(params[:item_ids])
-    
     render json: total
   end
 

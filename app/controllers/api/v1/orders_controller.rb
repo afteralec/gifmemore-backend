@@ -1,4 +1,4 @@
-class OrdersController < ApplicationController
+class Api::V1::OrdersController < ApplicationController
   def index
     orders = Order.all
     render json: orders
@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
   end
   
     def create
+      byebug
         order = Order.create(order_params)
         # added an instance method to create the entries for the ItemOrder table based off the ids we get from the front end --> will need to add them to the body of the request
         itemIds = params[:itemIds]
@@ -27,6 +28,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:name, :dob, :email, :address, :password)
+    params.require(:order).permit(:name, :email, :amount, address: {})
   end
 end

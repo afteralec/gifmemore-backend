@@ -7,7 +7,7 @@ class Cart < ApplicationRecord
   def self.total(item_ids)
     
    total = item_ids.sum{ |id| Item.find(id).price.to_f} 
-   puts total
+   
     return total
   end
 end
