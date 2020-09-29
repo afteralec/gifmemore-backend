@@ -1,4 +1,4 @@
-class CartsController < ApplicationController
+class Api::V1::CartsController < ApplicationController
   def index
     carts = Cart.all
     render json: carts
@@ -14,12 +14,13 @@ class CartsController < ApplicationController
     render json: cart
   end
 
+  def total 
+    # byebug
+    total = Cart.total(params[:item_ids])
+    
+    render json: total
+  end
 
-    def create
-        cart = Cart.create(cart_params)
-        render json: cart
-    end
-  
 # if we want to handle POST and DELETE of join records in carts controller ALT would be to use the POST and DELETE in items_carts controller
     def removeItem
         record = ItemCart.where(item_id: (params[:item_id]), cart_id: (params[:cart_id]))
@@ -54,6 +55,6 @@ class CartsController < ApplicationController
   private
 
   def cart_params
-    params.require(:cart).permit(:user_id)
+    params.require(:cart).permit(:user_id) 
   end
 end
