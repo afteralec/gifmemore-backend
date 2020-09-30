@@ -1,10 +1,9 @@
 class AuthController < ApplicationController
   def create
-    user = User.find_by(email: params[:email])
-    
-    if user && user.authenticate(params[:password])
-      token = self.issue_token(user)
-      render json: { email: user.email, id: user.id, jwt: token }
+    user = User.find_by(email: user_params[:email])
+    if user && user.authenticate(user_params[:password])
+      jwt = self.issue_token(user)
+      render json: {user: user, jwt: jwt}
     else
       render json: { error: 'Unable to log in', status: 401 }
     end
@@ -14,9 +13,15 @@ class AuthController < ApplicationController
     user = User.find(self.user_id)
 
     if user && logged_in?
-      render json: { email: user.email, id: user.id, jwt: self.token}
+      render json: {user: user, jwt: self.token}
     else
       render json: { error: 'User cannot be found', status: 401 }
     end
+  end
+  
+  private
+  
+  def user_params
+    params.require(:user).permit(:email, :password)
   end
 end
