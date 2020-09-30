@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   # post '/cart/addItem', to: 'carts#addItem'
   # post '/cart/removeItem', to: 'carts#removeItem'
   post '/login', to: 'auth#create'
+  get '/whoami', to: 'auth#show'
 
 end
 
