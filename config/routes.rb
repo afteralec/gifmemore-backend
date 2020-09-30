@@ -4,15 +4,15 @@ Rails.application.routes.draw do
       post '/cart_total', to: 'carts#total'
       resources :items, only: %i[ index ]
       resources :orders, only: %i[ create ]
-      resources :users 
       
       get '/orders/user_history/:user_id', to: 'orders#orderHistory'
     end
   end
+  resources :users, only: %i[create show update delete]
+
   # post '/cart/addItem', to: 'carts#addItem'
   # post '/cart/removeItem', to: 'carts#removeItem'
   post '/login', to: 'auth#create'
-  post '/signup', to: 'users#create'
 
 end
 

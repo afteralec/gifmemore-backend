@@ -6,7 +6,7 @@ describe User do
   end
 
   describe 'Validations' do
-    [:name, :dob, :email, :address].each do |validation|
+    [:name, :email].each do |validation|
       it { should validate_presence_of(validation) }
     end
   end
