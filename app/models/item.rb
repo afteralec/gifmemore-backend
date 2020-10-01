@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  has_many :item_carts
+  has_many :item_carts, dependent: :destroy
   has_many :item_categories
   has_many :item_orders
 
