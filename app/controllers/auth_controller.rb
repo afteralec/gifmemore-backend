@@ -1,9 +1,9 @@
 class AuthController < ApplicationController
   def create
-    user = User.find_by(email: user_params[:email])
+    user = User.includes(:items).find_by(email: user_params[:email])
     if user && user.authenticate(user_params[:password])
       jwt = self.issue_token(user)
-      render json: {user: user, jwt: jwt}
+      render json: {user: user, jwt: jwt}, include: [ :items ]
     else
       render json: { error: 'Unable to log in, please try again', status: 401 }
     end
