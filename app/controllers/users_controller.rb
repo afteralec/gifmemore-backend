@@ -22,7 +22,11 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    user.destroy
+    if user.destroy
+      render json: {message: 'User has been deleted'}
+    else
+      render json: {error: "You're stuck with us!"}
+    end
   end
 
   private

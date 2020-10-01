@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-  has_one :cart
+  has_one :cart, dependent: :destroy
+  has_many :items, through: :cart
+
   has_many :orders
 
   validates_presence_of :name, :email

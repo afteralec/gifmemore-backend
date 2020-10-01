@@ -20,39 +20,22 @@ class Api::V1::CartsController < ApplicationController
   end
 
 # if we want to handle POST and DELETE of join records in carts controller ALT would be to use the POST and DELETE in items_carts controller
-    def removeItem
-        record = ItemCart.where(item_id: (params[:item_id]), cart_id: (params[:cart_id]))
-        if record.destroy
-            render json: {message: 'sucessfully removed item from cart'}
-        else
-            render json: {error: 'failed to remove item from cart'}
-        end
-    end 
-
-    def addItem
-        record = ItemCart.create(item_id: (params[:item_id]), cart_id: (params[:cart_id]))
-        if record 
-            render json: record 
-        else 
-            render json: {error: 'failed to add item from cart'}
-        end
-    end
-
-  def update
-    cart = Cart.find(params[:id])
-    cart.update(cart_params)
-    render json: cart
+  def add_item
+    cart = self.current_user.cart
+    ItemCart.create(cart: cart, item_id: cart_params[:item_id])
+    render json: {items: cart.items}
   end
 
-
-  def destroy
-    cart = Cart.find(params[:id])
-    cart.destroy
-  end
+  def remove_item
+    cart = self.current_user.cart
+    item_cart = ItemCart.find_by(cart_id: cart.id, item_id: cart_params[:item_id])
+    item_cart.destroy
+    render json: {items: cart.items}
+  end 
 
   private
 
   def cart_params
-    params.require(:cart).permit(:user_id) 
+    params.require(:cart).permit(:item_id) 
   end
 end
