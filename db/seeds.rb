@@ -17,37 +17,13 @@ Order.destroy_all
 Item.destroy_all
 User.destroy_all
 
-janu =
-  User.create(
-    name: 'Janu',
-    dob: Date.iso8601('1991-06-13'),
-    email: 'janu.m.sung@gmail.com',
-    address: '7801 Flatiron St, Seattle, NY'
-  )
-
-danira =
-  User.create(
-    name: 'Danira',
-    dob: Date.iso8601('1988-11-29'),
-    email: 'dc@random.com',
-    address: '78 Fear and Loathing St, Las Vegas, NV'
-  )
-
-alec =
-  User.create(
-    name: 'Alec',
-    dob: Date.iso8601('1990-05-15'),
-    email: 'after.alec@gmail.com',
-    address: 'localhost:5500'
-  )
-
 giphy_response =
   RestClient::Request.execute(
     method: :get,
     url:
       "https://api.giphy.com/v1/gifs/trending?api_key=#{
         ENV['GIPHY_API_KEY']
-      }&limit=25&rating=pg-13",
+      }&limit=50&rating=pg-13",
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' }
   )
 
@@ -59,3 +35,5 @@ giphy_json['data'].each do |gif|
     price: rand.round(2)
   )
 end
+
+puts Item.all.length
