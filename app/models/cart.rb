@@ -1,6 +1,6 @@
 class Cart < ApplicationRecord
   belongs_to :user, required: true
-  has_many :item_carts
+  has_many :item_carts, dependent: :destroy
   has_many :items, through: :item_carts
 
   validates_presence_of :user
