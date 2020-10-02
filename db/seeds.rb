@@ -14,7 +14,7 @@ ItemOrder.destroy_all
 Cart.destroy_all
 Category.destroy_all
 Order.destroy_all
-Item.destroy_all
+# Item.destroy_all
 User.destroy_all
 
 giphy_response =
